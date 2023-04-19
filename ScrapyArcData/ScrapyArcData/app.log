@@ -1,0 +1,2 @@
+INFO:scrapy.utils.log:Scrapy 2.8.0 started (bot: ScrapyArcData)
+INFO:scrapy.utils.log:Versions: lxml 4.9.2.0, libxml2 2.9.12, cssselect 1.2.0, parsel 1.7.0, w3lib 2.1.1, Twisted 22.10.0, Python 3.7.3 (v3.7.3:ef4ec6ed12, Mar 25 2019, 22:22:05) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 23.1.1 (OpenSSL 3.1.0 14 Mar 2023), cryptography 40.0.2, Platform Windows-10-10.0.19041-SP0
