@@ -5,8 +5,17 @@
 
 import scrapy
 
+class ScrapyarcdataTableItem(scrapy.Item):
+    table_name = scrapy.Field()
+    table_data = scrapy.Field()
 
 class ScrapyarcdataItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    id = scrapy.Field()
+    brand = scrapy.Field()
+    url = scrapy.Field()
+    hostname = scrapy.Field()
+    robot = scrapy.Field()
+    tables = scrapy.Field()
+

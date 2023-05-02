@@ -1,0 +1,74 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Scrapy: lincolnSpider",
+            "type": "python",
+            "request": "launch",
+            "module": "scrapy",
+            "args": [
+                "crawl",
+                "lincolnSpider",
+                "-s",
+                "LOG_LEVEL=DEBUG",
+                // "--nolog",
+            ],
+            "cwd": "${workspaceFolder}/ScrapyArcData",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/.env;${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Scrapy: froniusSpider",
+            "type": "python",
+            "request": "launch",
+            "module": "scrapy",
+            "args": [
+                "crawl",
+                "froniusSpider",
+                "-s",
+                "LOG_LEVEL=DEBUG",
+                // "--nolog",
+            ],
+            "cwd": "${workspaceFolder}/ScrapyArcData",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/.env;${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Scrapy: 2Spiders",
+            "type": "python",
+            "request": "launch",
+            "module": "scrapy",
+            "args": [
+                "crawl",
+                "lincolnSpider froniusSpider",
+                "-s",
+                "LOG_LEVEL=DEBUG",
+                // "--nolog",
+            ],
+            "cwd": "${workspaceFolder}/ScrapyArcData",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/.env;${workspaceFolder}"
+            }
+        }
+
+
+        
+    ]
+}

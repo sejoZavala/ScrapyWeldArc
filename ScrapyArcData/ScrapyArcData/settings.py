@@ -25,7 +25,9 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 2
+DOWNLOAD_TIMEOUT = 15
+
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -62,9 +64,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "ScrapyArcData.pipelines.ScrapyarcdataPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "ScrapyArcData.pipelines.JsonWriterPipeline": 300,
+}
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -91,3 +94,21 @@ ROBOTSTXT_OBEY = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+import logging
+
+MY_FORMAT = '%(asctime)s [%(levelname)s] [%(name)s] [%(funcName)s - Line %(lineno)s] [%(message)s]'
+
+my_custom_formatter = logging.Formatter(MY_FORMAT)
+
+# Configure the registry controller for the main log file
+logging.basicConfig(filename='log_app.log', 
+                    level=logging.INFO, 
+                    format=MY_FORMAT)
+
+# Configure a second registry controller for error logs
+error_log_handler = logging.FileHandler('log_errors.log', encoding='utf-8')
+error_log_handler.setLevel(logging.WARNING)
+error_log_handler.setFormatter(my_custom_formatter)
+
+logging.getLogger().addHandler(error_log_handler)
