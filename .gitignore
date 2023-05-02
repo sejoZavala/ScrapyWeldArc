@@ -24,4 +24,4 @@ env.bak/
 venv.bak/
 
 ArcData_*.json
-.log
+log*.log
