@@ -49,26 +49,5 @@
                 "PYTHONPATH": "${workspaceFolder}/.env;${workspaceFolder}"
             }
         },
-        {
-            "name": "Scrapy: 2Spiders",
-            "type": "python",
-            "request": "launch",
-            "module": "scrapy",
-            "args": [
-                "crawl",
-                "lincolnSpider froniusSpider",
-                "-s",
-                "LOG_LEVEL=DEBUG",
-                // "--nolog",
-            ],
-            "cwd": "${workspaceFolder}/ScrapyArcData",
-            "console": "integratedTerminal",
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}/.env;${workspaceFolder}"
-            }
-        }
-
-
-        
     ]
 }

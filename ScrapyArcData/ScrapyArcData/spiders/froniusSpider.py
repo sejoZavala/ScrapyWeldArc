@@ -83,9 +83,8 @@ class froniusSpider(scrapy.Spider):
 
     def parse(self, response):
         try:
-            self.countIp += 1
             self.url = response.url
-            logger.info('Starting {0} ({1}/{2})'.format(self.url,self.countIp,len(self.start_urls)))
+            logger.info('Starting {0}'.format(self.url))
             
             arcDataHeader = response.css('body > table:nth-child(1) > tr > td > table > tr > td:nth-child(2) > strong > font:nth-of-type(2)::text')
             arcDataHostName = arcDataHeader[0].re_first(r''+constants.HOSTNAME+'\s*(.*)')
@@ -109,11 +108,11 @@ class froniusSpider(scrapy.Spider):
             data_ArcData['robot'] = self.arcDataRobotNo
             data_ArcData['tables'] = self.get_tables_weld_schedule_data(response, referencesWP)
             
-            logger.info('Finish {0} ({1}/{2})'.format(self.url,self.countIp,len(self.start_urls)))
+            logger.info('Finishing {0}'.format(self.url))
             yield data_ArcData
 
         except Exception as err:
-            logger.error('Error: {0}'.format(err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
     
 
     def handle_error(self, failure):
@@ -142,7 +141,7 @@ class froniusSpider(scrapy.Spider):
         file_name = f"Errors_ArcData_{datetime.datetime.now().strftime('%Y-%m-%d')}_{constants.FRONIUS}.txt"
 
         if os.path.exists(file_name):
-            with open(self.file_name, "a") as f:
+            with open(file_name, "a") as f:
                 f.write(f"\n\n{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -> {msg}")
         else:
             with open(file_name, "w") as f:
@@ -170,7 +169,7 @@ class froniusSpider(scrapy.Spider):
             return wsd
         
         except Exception as err:
-            logger.error('Error: {0}'.format(err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None
         
     def get_weld_procedure_data(self, table):
@@ -202,7 +201,7 @@ class froniusSpider(scrapy.Spider):
             return wpd
         
         except Exception as err:
-            logger.error('Error: {0}'.format(err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None
 
             
@@ -221,5 +220,5 @@ class froniusSpider(scrapy.Spider):
             return list_wsd
         
         except Exception as err:
-            logger.error('Error: {0}'.format(err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None

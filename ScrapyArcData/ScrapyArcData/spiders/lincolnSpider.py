@@ -23,7 +23,7 @@ class lincolnSpider(scrapy.Spider):
 
     # allowed_domains = ["192.168.115.50"]
 
-    start_urls = [
+    start_urlsaaaa = [
         "http://192.168.115.30/FRS/awdata.stm",
         "http://192.168.115.31/FRS/awdata.stm",
         "http://192.168.115.32/FRS/awdata.stm",
@@ -167,7 +167,7 @@ class lincolnSpider(scrapy.Spider):
 
 
     # start_urls = ['http://192.168.116.58/FRS/awdata.stm','http://192.168.115.42/FRS/awdata.stm']
-   # start_urls = ['http://192.168.116.58/FRS/awdata.stm','http://192.168.116.56/FRS/awdata.stm']
+    start_urls = ['http://192.168.116.58/FRS/awdata.stm','http://192.168.116.56/FRS/awdata.stm']
     # start_urls = ['http://192.168.115.37/FRS/awdata.stm','http://192.168.83.234/FRS/awdata.stm']
 
 
@@ -194,9 +194,9 @@ class lincolnSpider(scrapy.Spider):
 
     def parse(self, response):
         try:
-            self.countIp += 1
             self.url = response.url
-            logger.info('Starting {0} ({1}/{2})'.format(self.url,self.countIp,len(self.start_urls)))
+            logger.info('Starting {0}'.format(self.url))
+            
 
             arcDataHeader = response.css('body > table:nth-child(1) > tr > td > table > tr > td:nth-child(2) > strong > font:nth-of-type(2)::text')
             arcDataHostName = arcDataHeader[0].re_first(r''+constants.HOSTNAME+'\s*(.*)')
@@ -219,11 +219,11 @@ class lincolnSpider(scrapy.Spider):
             data_ArcData['robot'] = self.arcDataRobotNo
             data_ArcData['tables'] = self.get_tables_weld_schedule_data(response, referencesWP)
 
-            logger.info('Finish {0} ({1}/{2})'.format(self.url,self.countIp,len(self.start_urls)))
+            logger.info('Finishing {0}'.format(self.url))
             yield data_ArcData
 
         except Exception as err:
-            logger.error('Error in {0} Msg: {1}'.format( self.url, err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
 
 
     def handle_error(self, failure):
@@ -280,7 +280,7 @@ class lincolnSpider(scrapy.Spider):
             return wsd
 
         except Exception as err:
-            logger.error('Error in {0} Msg: {1}'.format( self.url, err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None
 
     def get_weld_procedure_data(self, table):
@@ -313,7 +313,7 @@ class lincolnSpider(scrapy.Spider):
             return wpd
 
         except Exception as err:
-            logger.error('Error in {0} Msg: {1}'.format( self.url, err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None
 
 
@@ -333,5 +333,5 @@ class lincolnSpider(scrapy.Spider):
             return list_wsd
 
         except Exception as err:
-            logger.error('Error: {0}'.format(err))
+            logger.error('Error in {0} Msg: {1}'.format(self.url, err))
             return None
